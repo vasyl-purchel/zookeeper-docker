@@ -16,19 +16,22 @@ dependencies:
 test:
   pre:
     - docker-compose up -d
-    - docker ps -a
   override:
     - for i in {2181..2183}; do echo mntr | nc 172.17.42.1 $i | grep zk_followers ; done
+    - docker ps -a
+    - docker logs zoo-node-1
+    - docker logs zoo-node-2
+    - docker logs zoo-node-3
 
 deployment:
   hub:
     branch: master
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push vasylpurchel/zookeeper:latest
-      - docker tag vasylpurchel/zookeeper:latest vasylpurchel/zookeeper:3.4.7
-      - docker push vasylpurchel/zookeeper:3.4.7
+      - docker tag vasylpurchel/zookeeper:latest vasylpurchel/zookeeper:$CIRCLE_SHA1
+      - docker push vasylpurchel/zookeeper:$CIRCLE_SHA1
 
 notify:
   webhooks:
     - url: https://webhooks.gitter.im/e/943bd08b4fcb92798d6e
+    - url: https://hooks.slack.com/services/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
