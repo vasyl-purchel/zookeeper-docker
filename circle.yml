@@ -1,6 +1,7 @@
 machine:
   services:
     - docker
+
 dependencies:
   cache_directories:
     - "~/docker"
@@ -14,10 +15,9 @@ dependencies:
 
 test:
   pre:
-    - docker-compose pull
     - docker-compose up -d
   override:
-    - ZK_FOLLOWERS=$(for i in {2181..2183}; do echo mntr | nc 172.17.0.1 $i | grep zk_followers ; done)
+    - ZK_FOLLOWERS=$(for i in {2181..2183}; do echo mntr | nc 172.17.42.1 $i | grep zk_followers ; done)
     - if [[ "$ZK_FOLLOWERS" != "zk_followers 2" ]]; then echo "Expected to get zk-followers 2 but didn't get it"; exit 1; fi
 
 deployment:
@@ -28,3 +28,7 @@ deployment:
       - docker push vasylpurchel/zookeeper:latest
       - docker tag vasylpurchel/zookeeper:latest vasylpurchel/zookeeper:3.4.7
       - docker push vasylpurchel/zookeeper:3.4.7
+
+notify:
+  webhooks:
+    - url: https://webhooks.gitter.im/e/943bd08b4fcb92798d6e
