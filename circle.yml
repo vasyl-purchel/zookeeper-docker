@@ -17,9 +17,7 @@ test:
     - echo mntr | nc 172.17.42.1 9200
     - docker ps -a
     - docker logs zookeeper
-    - ZK_SERVER_STATE=$(echo mntr | nc 172.17.42.1 9200 | grep "zk_server_state")
-    - echo $ZK_SERVER_STATE
-    - if [ "$ZK_SERVER_STATE" != "zk_server_state	standalone" ]; then exit 1; fi
+    - ZK_SERVER_STATE=$(echo mntr | nc 172.17.42.1 9200 | grep "zk_server_state") && if [ "$ZK_SERVER_STATE" != "zk_server_state	standalone" ]; then exit 1; fi
 
 deployment:
   hub:
