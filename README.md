@@ -26,7 +26,7 @@ docker run -d -ti --publish 2181:2181 --name zookeeper vasylpurchel/zookeeper
 Or it can be used in replicated mode:
 
 ```bash
-docker run -d -ti -e ZK_CLIENT_PORT="2181" -e ZK_SERVERS="172.17.0.1:2888:3888 172.17.0.1:2889:3889 172.17.0.1:2890:3890" -e ZK_ID=1 --publish 2181:2181 --publish 2888:2888 --publish 3888:3888 --name zookeeper-node-1 vasylpurchel/zookeeper
+docker run -d -ti -e ZK_CLIENT_PORT="2181" -e ZK_SERVERS="172.17.42.1:2888:3888 172.17.42.1:2889:3889 172.17.42.1:2890:3890" -e ZK_ID=1 --publish 2181:2181 --publish 2888:2888 --publish 3888:3888 --name zookeeper-node-1 vasylpurchel/zookeeper
 ...
 ```
 
@@ -59,7 +59,7 @@ so you can use this image to run other zookeeper related tasks and not only star
 
 ## Notes
 
-Make sure you are in zookeeper folder and that ip address in **docker-compose.yml** file is correct (mine is 127.17.0.1):
+Make sure you are in zookeeper folder and that ip address in **docker-compose.yml** file is correct (mine is 127.17.0.1 while default is 127.17.42.1):
 
 ```bash
 ifconfig | grep "docker0" -C 2 | grep "inet addr"
@@ -80,7 +80,7 @@ docker-compose up
 check that it works just run:
 
 ```bash
-for i in {2181..2183}; do echo mntr | nc 172.17.0.1 $i | grep zk_followers ; done
+for i in {2181..2183}; do echo mntr | nc 172.17.42.1 $i | grep zk_followers ; done
 ```
 
 ## TODO
