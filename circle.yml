@@ -13,8 +13,8 @@ dependencies:
 
 test:
   override:
-    - docker run -d -ti --publish 2181:2181 --name zookeeper vasylpurchel/zookeeper
-    - echo mntr | nc 172.17.42.1 2181
+    - docker run -d -p 9200:2181 --name zookeeper vasylpurchel/zookeeper; sleep 10
+    - echo mntr | nc 172.17.42.1 9200
     - docker ps -a
     - docker logs zookeeper
 
