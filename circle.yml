@@ -18,6 +18,7 @@ test:
     - docker-compose up -d
   override:
     - ZK_FOLLOWERS=$(for i in {2181..2183}; do echo mntr | nc 172.17.42.1 $i | grep zk_followers ; done)
+    - echo $ZK_FOLLOWERS
     - if [[ "$ZK_FOLLOWERS" != "zk_followers 2" ]]; then echo "Expected to get zk-followers 2 but didn't get it"; exit 1; fi
 
 deployment:
