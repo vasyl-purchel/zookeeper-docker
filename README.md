@@ -10,7 +10,7 @@ This is an image for [apache zookeeper][1] based on [ubuntu:trusty docker image]
 
 ## Supported tags and respective Dockerfile links:
 
- * 3.4.7, latest ([Dockerfile][3])
+ * 3.4.7, latest, circleci ([Dockerfile][3])
 
 ## Usage
 
