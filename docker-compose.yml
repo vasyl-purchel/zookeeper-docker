@@ -1,0 +1,48 @@
+zookeeper-node-1:
+  image: vasylpurchel/zookeeper
+  container_name: zoo-node-1
+  net: "host"
+  ports:
+    - "2181:2181"
+    - "2888:2888"
+    - "3888:3888"
+  volumes:
+    - /data/zookeeper/node1:/tmp/zookeeper
+  environment:
+    ZK_CLIENT_PORT: 2181
+    ZK_SERVERS: "172.17.0.1:2888:3888 172.17.0.1:2889:3889 172.17.0.1:2890:3890"
+    ZK_ID: 1
+    ZK_INIT_LIMIT: 10
+    ZK_SYNC_LIMIT: 5
+zookeeper-node-2:
+  image: vasylpurchel/zookeeper
+  container_name: zoo-node-2
+  net: "host"
+  ports:
+    - "2182:2182"
+    - "2889:2889"
+    - "3889:3889"
+  volumes:
+    - /data/zookeeper/node2:/tmp/zookeeper
+  environment:
+    ZK_CLIENT_PORT: 2182
+    ZK_SERVERS: "172.17.0.1:2888:3888 172.17.0.1:2889:3889 172.17.0.1:2890:3890"
+    ZK_ID: 2
+    ZK_INIT_LIMIT: 10
+    ZK_SYNC_LIMIT: 5
+zookeeper-node-3:
+  image: vasylpurchel/zookeeper
+  container_name: zoo-node-3
+  net: "host"
+  ports:
+    - "2183:2183"
+    - "2890:2890"
+    - "3890:3890"
+  volumes:
+    - /data/zookeeper/node3:/tmp/zookeeper
+  environment:
+    ZK_CLIENT_PORT: 2183
+    ZK_SERVERS: "172.17.0.1:2888:3888 172.17.0.1:2889:3889 172.17.0.1:2890:3890"
+    ZK_ID: 3
+    ZK_INIT_LIMIT: 10
+    ZK_SYNC_LIMIT: 5
