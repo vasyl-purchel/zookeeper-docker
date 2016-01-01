@@ -89,8 +89,6 @@ for i in {2181..2183}; do echo mntr | nc 172.17.0.1 $i | grep zk_followers ; don
 
 ## TODO
 
- * Add badges for image size, layers, docker starts and pulls, circleCI and maybe something else
-
  * `--net=host` is used to tell docker containers to use host network, so this instances will be able to comunicate between themselves, need to be changed to overlay network so we can have multi-host network that will be using it
 
 [1]: https://zookeeper.apache.org/
