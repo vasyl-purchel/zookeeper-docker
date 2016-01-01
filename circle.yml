@@ -7,21 +7,16 @@ dependencies:
     - "~/docker"
   override:
     - docker info
-    - ifconfig
-    - sudo pip install --upgrade docker-compose==1.5.2
     - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
     - docker build -t vasylpurchel/zookeeper .
     - mkdir -p ~/docker; docker save vasylpurchel/zookeeper > ~/docker/image.tar
 
 test:
-  pre:
-    - docker-compose up -d
   override:
-    - for i in {2181..2183}; do echo mntr | nc 172.17.42.1 $i | grep zk_followers ; done
+    - docker run -d -ti --publish 2181:2181 --name zookeeper vasylpurchel/zookeeper
+    - echo mntr | nc 172.17.42.1 2181
     - docker ps -a
-    - docker logs zoo-node-1
-    - docker logs zoo-node-2
-    - docker logs zoo-node-3
+    - docker logs zookeeper
 
 deployment:
   hub:

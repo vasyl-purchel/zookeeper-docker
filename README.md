@@ -1,12 +1,16 @@
 # Zookeeper
 
-[![Join the chat][1]][2]
+[![Gitter](https://img.shields.io/gitter/room/vasyl-purchel/zookeeper.svg)](https://gitter.im/vasyl-purchel/zookeeper)
+[![imagelayers.io](https://badge.imagelayers.io/vasylpurchel/zookeeper:latest.svg)](https://imagelayers.io/?images=vasylpurchel/zookeeper:latest)
+[![Docker Stars](https://img.shields.io/docker/stars/vasylpurchel/zookeeper.svg)](https://hub.docker.com/r/vasylpurchel/zookeeper/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/vasylpurchel/zookeeper.svg)](https://hub.docker.com/r/vasylpurchel/zookeeper)
 
-This is an image for [apache zookeeper][3] based on [ubuntu:trusty docker image][4]
+
+This is an image for [apache zookeeper][1] based on [ubuntu:trusty docker image][2]
 
 ## Supported tags and respective Dockerfile links:
 
- * 3.4.7, latest ([Dockerfile][5])
+ * 3.4.7, latest ([Dockerfile][3])
 
 ## Usage
 
@@ -26,7 +30,7 @@ docker run -d -ti --publish 2181:2181 --name zookeeper vasylpurchel/zookeeper
 Or it can be used in replicated mode:
 
 ```bash
-docker run -d -ti -e ZK_CLIENT_PORT="2181" -e ZK_SERVERS="172.17.42.1:2888:3888 172.17.42.1:2889:3889 172.17.42.1:2890:3890" -e ZK_ID=1 --publish 2181:2181 --publish 2888:2888 --publish 3888:3888 --name zookeeper-node-1 vasylpurchel/zookeeper
+docker run -d -ti -e ZK_CLIENT_PORT="2181" -e ZK_SERVERS="172.17.0.1:2888:3888 172.17.0.1:2889:3889 172.17.0.1:2890:3890" -e ZK_ID=1 --publish 2181:2181 --publish 2888:2888 --publish 3888:3888 --name zookeeper-node-1 vasylpurchel/zookeeper
 ...
 ```
 
@@ -80,7 +84,7 @@ docker-compose up
 check that it works just run:
 
 ```bash
-for i in {2181..2183}; do echo mntr | nc 172.17.42.1 $i | grep zk_followers ; done
+for i in {2181..2183}; do echo mntr | nc 172.17.0.1 $i | grep zk_followers ; done
 ```
 
 ## TODO
@@ -89,8 +93,6 @@ for i in {2181..2183}; do echo mntr | nc 172.17.42.1 $i | grep zk_followers ; do
 
  * `--net=host` is used to tell docker containers to use host network, so this instances will be able to comunicate between themselves, need to be changed to overlay network so we can have multi-host network that will be using it
 
-[1]: https://badges.gitter.im/Join%20Chat.svg
-[2]: https://gitter.im/vasyl-purchel/zookeeper
-[3]: https://zookeeper.apache.org/
-[4]: https://hub.docker.com/_/ubuntu/
-[5]: dockerfile
+[1]: https://zookeeper.apache.org/
+[2]: https://hub.docker.com/_/ubuntu/
+[3]: https://github.com/vasyl-purchel/zookeeper-docker/blob/master/Dockerfile

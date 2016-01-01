@@ -10,7 +10,7 @@ zookeeper-node-1:
     - /data/zookeeper/node1:/tmp/zookeeper
   environment:
     ZK_CLIENT_PORT: 2181
-    ZK_SERVERS: "172.17.42.1:2888:3888 172.17.42.1:2889:3889 172.17.42.1:2890:3890"
+    ZK_SERVERS: "172.17.0.1:2888:3888 172.17.0.1:2889:3889 172.17.0.1:2890:3890"
     ZK_ID: 1
     ZK_INIT_LIMIT: 10
     ZK_SYNC_LIMIT: 5
@@ -26,7 +26,7 @@ zookeeper-node-2:
     - /data/zookeeper/node2:/tmp/zookeeper
   environment:
     ZK_CLIENT_PORT: 2182
-    ZK_SERVERS: "172.17.42.1:2888:3888 172.17.42.1:2889:3889 172.17.42.1:2890:3890"
+    ZK_SERVERS: "172.17.0.1:2888:3888 172.17.0.1:2889:3889 172.17.0.1:2890:3890"
     ZK_ID: 2
     ZK_INIT_LIMIT: 10
     ZK_SYNC_LIMIT: 5
@@ -42,7 +42,7 @@ zookeeper-node-3:
     - /data/zookeeper/node3:/tmp/zookeeper
   environment:
     ZK_CLIENT_PORT: 2183
-    ZK_SERVERS: "172.17.42.1:2888:3888 172.17.42.1:2889:3889 172.17.42.1:2890:3890"
+    ZK_SERVERS: "172.17.0.1:2888:3888 172.17.0.1:2889:3889 172.17.0.1:2890:3890"
     ZK_ID: 3
     ZK_INIT_LIMIT: 10
     ZK_SYNC_LIMIT: 5
